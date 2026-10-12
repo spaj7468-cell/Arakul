@@ -2,6 +2,16 @@
 'use strict';
 const $=s=>document.querySelector(s),editor=$('#editorArea');
 const docsKey='arakul.documents.v1',draftKey='arakul.draft.v1';
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+const editorActions=document.querySelector('#page-editor .head-actions');
+if(editorActions&&!document.getElementById('editorOpenFile')){
+ const label=document.createElement('label');label.className='btn';label.textContent='Открыть файл';
+ const input=document.createElement('input');input.type='file';input.id='editorOpenFile';input.accept='.txt,.md,.markdown,.html,.htm,.doc,.json,.csv';input.hidden=true;label.appendChild(input);editorActions.insertBefore(label,editorActions.firstChild);
+ input.addEventListener('change',async()=>{const f=input.files&&input.files[0];if(!f)return;try{const text=await f.text();if(/\\.(html?|doc)$/i.test(f.name)){const doc=new DOMParser().parseFromString(text,'text/html');doc.querySelectorAll('script,iframe,object,embed,link,meta').forEach(n=>n.remove());editor.innerHTML=doc.body.innerHTML||'<p></p>'}else{editor.innerHTML=text.split(/\\r?\\n/).map(line=>'<p>'+escapeHtml(line||' ')+'</p>').join('')}$('#editorSaveStatus').textContent='Открыт файл: '+f.name;editor.dispatchEvent(new Event('input',{bubbles:true}));input.value=''}catch(err){alert('Не удалось открыть файл как текстовый документ.')}})
+}
+const mdActions=document.querySelector('#page-markdown .head-actions');
+if(mdActions&&!document.getElementById('mdExportHtml')){const b=document.createElement('button');b.className='btn';b.id='mdExportHtml';b.textContent='Экспорт HTML';mdActions.insertBefore(b,document.getElementById('mdExport'));b.addEventListener('click',()=>download('document.html','<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Markdown export</title><style>body{font:16px/1.7 system-ui,sans-serif;max-width:850px;margin:40px auto;padding:0 20px}pre{overflow:auto;padding:14px;background:#f3f3f3}code{font-family:monospace}</style></head><body>'+preview.innerHTML+'</body></html>','text/html;charset=utf-8'))}
+
 function readDocs(){try{const x=JSON.parse(localStorage.getItem(docsKey)||'[]');return Array.isArray(x)?x:[]}catch(e){return[]}}
 function writeDocs(x){try{localStorage.setItem(docsKey,JSON.stringify(x));return true}catch(e){return false}}
 function uid(){return 'doc-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7)}
