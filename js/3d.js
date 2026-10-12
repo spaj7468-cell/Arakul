@@ -47,6 +47,10 @@ $('#objDuplicate').addEventListener('click',()=>{const o=objects[selected];if(!o
 $('#objDelete').addEventListener('click',()=>{if(!objects.length)return;objects.splice(selected,1);selected=Math.max(0,selected-1);persist();list();fields();render()});
 $('#sceneReset').addEventListener('click',()=>{objects=[];nextId=1;add('cube');add('plane');selected=0;persist();list();fields();render()});
 $('#viewHome').addEventListener('click',()=>{yaw=.72;pitch=.48;zoom=5.2;render()});
+const orbitBar=document.createElement('div');orbitBar.className='orbit-controls';orbitBar.setAttribute('aria-label','Управление камерой');
+orbitBar.innerHTML='<span class="orbit-label">КАМЕРА</span><button type="button" class="btn small" data-orbit="left" aria-label="Повернуть влево" title="Влево">↶</button><button type="button" class="btn small" data-orbit="right" aria-label="Повернуть вправо" title="Вправо">↷</button><button type="button" class="btn small" data-orbit="up" aria-label="Наклонить вверх" title="Вверх">↑</button><button type="button" class="btn small" data-orbit="down" aria-label="Наклонить вниз" title="Вниз">↓</button><span class="orbit-sep"></span><button type="button" class="btn small" data-orbit="in" aria-label="Приблизить" title="Приблизить">+</button><button type="button" class="btn small" data-orbit="out" aria-label="Отдалить" title="Отдалить">−</button>';
+const viewportTop=canvas.closest('.viewport-panel')?.querySelector('.viewport-top');
+if(viewportTop){viewportTop.appendChild(orbitBar);orbitBar.addEventListener('click',e=>{const b=e.target.closest('[data-orbit]');if(!b)return;switch(b.dataset.orbit){case'left':yaw-=.16;break;case'right':yaw+=.16;break;case'up':pitch=Math.max(-1.25,pitch-.12);break;case'down':pitch=Math.min(1.25,pitch+.12);break;case'in':zoom=Math.max(2.5,zoom-.45);break;case'out':zoom=Math.min(12,zoom+.45);break}render()})}
 $('#gridToggle').addEventListener('click',()=>{showGrid=!showGrid;$('#gridToggle').textContent=showGrid?'Сетка ✓':'Сетка';render()});
 $('#wireToggle').addEventListener('click',()=>{wire=!wire;$('#wireToggle').textContent=wire?'Заливка':'Каркас';render()});
 function download(name,data,type){const u=URL.createObjectURL(new Blob([data],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
@@ -54,7 +58,7 @@ function exportObj(){let out='# Arakul Studio OBJ export\n',offset=1;objects.for
 function exportJson(){download('arakul-scene.json',JSON.stringify({format:'Arakul Scene v1',objects},null,2),'application/json')}
 $('#sceneExport').addEventListener('click',exportObj);$('#sceneExportJson').addEventListener('click',exportJson);
 canvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,yaw,pitch,id:e.pointerId};canvas.setPointerCapture(e.pointerId)});
-canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw=drag.yaw+(e.clientX-drag.x)*.009;pitch=Math.max(-1.25,Math.min(1.25,drag.pitch-(e.clientY-drag.y)*.009));render()});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw=drag.yaw+(e.clientX-drag.x)*.006;pitch=Math.max(-1.25,Math.min(1.25,drag.pitch-(e.clientY-drag.y)*.006));render()});
 canvas.addEventListener('pointerup',e=>{if(drag&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<5){const rect=canvas.getBoundingClientRect(),w=rect.width,h=rect.height;let best=-1,dist=48;objects.forEach((o,i)=>{const p=project([o.x,o.y,o.z],w,h),d=Math.hypot(p[0]-(e.clientX-rect.left),p[1]-(e.clientY-rect.top));if(d<dist){dist=d;best=i}});if(best>=0){selected=best;list();fields();render()}}drag=null});canvas.addEventListener('pointercancel',()=>{drag=null});
 canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(2.5,Math.min(12,zoom+Math.sign(e.deltaY)*.35));render()},{passive:false});
 function resize(){render()}window.addEventListener('resize',resize);
