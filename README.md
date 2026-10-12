@@ -1,54 +1,58 @@
-# Arakul — OuRi Studio
+# Arakul Studio — OuRi
 
-**Arakul** — локальное рабочее пространство OuRi для текста, файлов и изображений. Монохромный, адаптивный интерфейс с сеткой, выдвижным меню, настройками и инструментами, работающими в браузере.
+[![MIT License](https://img.shields.io/badge/license-MIT-white)](LICENSE) · Vanilla JavaScript · no build · PWA-ready
+
+**Arakul Studio** is a free, local-first workspace for writing, file transformations, images, Markdown and lightweight 3D scene blocking. It follows the OuRi family design language used by [OuRi Corp](https://github.com/spaj7468-cell/ouri-corp), [QKC](https://github.com/spaj7468-cell/qkc), [QKC Engine](https://github.com/spaj7468-cell/qkc-engine) and [QKCcode](https://github.com/spaj7468-cell/qkccode).
 
 ## Architecture
 
-Проект следует архитектурному подходу семейства OuRi: **vanilla JavaScript, без обязательной сборки и тяжёлых UI-фреймворков**.
-
 ```text
-index.html             оболочка приложения и семантическая разметка
-css/style.css          дизайн-система, темы, сетка, адаптивность
-js/app.js              навигация и логика инструментов
-js/settings.js         настройки интерфейса и локальные предпочтения
-.github/workflows/     публикация GitHub Pages через Actions
+index.html                 app shell, views, toolbars and dialogs
+css/style.css              monochrome design system and responsive UI
+js/app.js                  router and text / file / image utilities
+js/settings.js             theme, grid, density, motion and preferences
+js/extras.js               Markdown renderer, command palette, local document library
+js/3d.js                   canvas 3D viewport, primitives, OBJ / JSON export
+assets/brand.svg            brand mark and install icon
+manifest.webmanifest        PWA metadata
+sw.js                       same-origin offline cache
+test/smoke.mjs               lightweight repository smoke test
+.github/workflows/pages.yml GitHub Pages deployment
 ```
-
-- **UI shell:** `index.html` задаёт структуру экранов и доступные элементы управления.
-- **Design system:** CSS-переменные поддерживают светлую и тёмную темы, адаптивные размеры, сетчатый фон и режим плотного интерфейса.
-- **Application logic:** `js/app.js` содержит редактор, конвертацию текстовых файлов, обработку изображений, утилиты текста, заметки и навигацию.
-- **Preferences:** `js/settings.js` управляет темой, сеткой, плотностью, размером текста и анимациями. Предпочтения хранятся локально, если пользователь включил запоминание.
-- **Privacy by design:** обработка выполняется в браузере; заметки и настройки хранятся в локальном хранилище устройства. Не используй браузерное хранилище как единственную копию важных документов.
-- **Dependencies:** ноль runtime-зависимостей; сборка не требуется.
 
 ## Features
 
-- Rich-text редактор со статистикой и экспортом TXT / Markdown / HTML
-- Конвертер текстовых форматов TXT, Markdown, HTML, JSON и CSV
-- Удаление однотонного фона изображения и экспорт прозрачного PNG
-- Изменение размеров изображений, экспорт PNG / JPEG / WebP
-- Инструменты текста и быстрые локальные заметки
-- Главное меню-бургер, мобильная навигация и быстрый переход между разделами
-- Настройки темы, фоновой сетки, плотности интерфейса, размера текста и анимаций
-- Клавиатурная доступность, фокус-индикаторы и поддержка `prefers-reduced-motion`
+- **Word-like document editor:** headings, paragraphs, bold / italic / underline / strike-through, alignment, lists, links, tables, inline images, undo / redo, statistics, browser printing to PDF and HTML/TXT/Markdown/Word-compatible HTML export.
+- **Local document library:** explicitly save documents, reopen, export and delete them. A local draft is saved automatically where browser storage is available.
+- **Markdown Studio:** live preview, safe basic Markdown formatting, copy and export.
+- **Mini 3D Studio:** cube, sphere, cylinder and plane primitives; orbit with mouse or touch; zoom; object list and transform controls; wireframe / grid toggles; OBJ and JSON export.
+- **Image tools:** resize / convert PNG, JPEG and WebP, and remove a similar solid-color background into transparent PNG.
+- **Text utilities:** case conversion, whitespace cleanup, line sorting, duplicate removal and statistics.
+- **File conversion:** text formats including TXT, Markdown, HTML, JSON and CSV.
+- **Settings:** dark / light theme, background grid, compact layout, text size, animations and preference persistence.
+- **Quick command palette:** press Ctrl+K (or Cmd+K on Mac).
+- **PWA cache:** on a supported host such as GitHub Pages, the app shell can open offline after its first successful load.
 
-## Run locally
+## Privacy and limitations
 
-Открой `index.html` в браузере. Для тестирования локального сервера:
+Tools run in the browser. Local notes, draft documents and the document library are stored on this device; they do not sync to other devices. Clear browser data only after exporting important work. The 3D editor is a lightweight scene-blocking tool, not a full Blender replacement: it exports OBJ geometry and scene JSON, but does not yet provide sculpting, UV editing, animation timelines or a full material node system. Word-compatible `.doc` export is HTML-based; for PDF use **Print / PDF**. A real modern `.docx` export is not included.
+
+## Run
+
+Open `index.html`, or run:
 
 ```sh
 python3 -m http.server 8080
 ```
 
-Затем открой `http://localhost:8080`.
+Then visit `http://localhost:8080`. PWA offline caching requires a web server / HTTPS; browser storage may be unavailable in private mode.
 
-## OuRi family
+## Test
 
-- [OuRi Corp](https://github.com/spaj7468-cell/ouri-corp)
-- [QKC](https://github.com/spaj7468-cell/qkc)
-- [QKC Engine](https://github.com/spaj7468-cell/qkc-engine)
-- [QKCcode](https://github.com/spaj7468-cell/qkccode)
+```sh
+node test/smoke.mjs
+```
 
 ## License
 
-MIT — see [LICENSE](./LICENSE), if present.
+MIT — see [LICENSE](LICENSE).
