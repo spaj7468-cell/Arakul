@@ -2,6 +2,11 @@
 'use strict';
 const $=s=>document.querySelector(s),canvas=$('#sceneCanvas');if(!canvas)return;
 const ctx=canvas.getContext('2d');let objects=[],selected=0,nextId=1,yaw=.72,pitch=.48,zoom=5.2,showGrid=true,wire=false,drag=null,lastPinch=0;
+const transformGrid=document.querySelector('.transform-grid');
+function addControl(id,label,type,value){if(document.getElementById(id)||!transformGrid)return;const wrap=document.createElement('label');wrap.className='field';const cap=document.createElement('span');cap.textContent=label;const input=document.createElement('input');input.className='input';input.id=id;input.type=type;input.value=value;if(type==='number')input.step='5';if(type==='color')input.value='#bfc2c7';wrap.append(cap,input);transformGrid.appendChild(wrap)}
+addControl('objRX','Вращение X°','number','0');addControl('objRY','Вращение Y°','number','0');addControl('objRZ','Вращение Z°','number','0');addControl('objColor','Цвет объекта','color','#bfc2c7');
+if(!document.getElementById('objDuplicate')){const b=document.createElement('button');b.className='btn';b.id='objDuplicate';b.textContent='Дублировать объект';const del=document.getElementById('objDelete');if(del&&del.parentNode)del.parentNode.insertBefore(b,del)}
+
 const storeKey='ar akul-scene-v1'.replace(/ /g,'');
 function safeLoad(){try{const x=JSON.parse(localStorage.getItem(storeKey)||'null');if(Array.isArray(x)&&x.length)objects=x}catch(e){}}
 function persist(){try{localStorage.setItem(storeKey,JSON.stringify(objects))}catch(e){}}
