@@ -56,3 +56,14 @@ node test/smoke.mjs
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+
+## OuRi ecosystem
+
+- [OuRi Corp — project directory](https://spaj7468-cell.github.io/ouri-corp/)
+- [QKC — knowledge trainer](https://spaj7468-cell.github.io/qkc/)
+- [QKCcode — programming school](https://spaj7468-cell.github.io/qkccode/)
+- [QKC Engine — quiz engine](https://spaj7468-cell.github.io/qkc-engine/)
+- [All repositories](https://github.com/spaj7468-cell?tab=repositories)
+
+OuRi projects were created at different times and have different scopes and maturity levels. Quality and features can vary; a newer project is not automatically better in every area.
