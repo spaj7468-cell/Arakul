@@ -1,40 +1,54 @@
 # Arakul — OuRi Studio
 
-**OuRi Studio** is a lightweight, monochrome collection of browser-based tools by OuRi. The initial release uses plain HTML, CSS and JavaScript: no build step, no package manager, and no required third-party dependencies.
+**Arakul** — локальное рабочее пространство OuRi для текста, файлов и изображений. Монохромный, адаптивный интерфейс с сеткой, выдвижным меню, настройками и инструментами, работающими в браузере.
+
+## Architecture
+
+Проект следует архитектурному подходу семейства OuRi: **vanilla JavaScript, без обязательной сборки и тяжёлых UI-фреймворков**.
+
+```text
+index.html             оболочка приложения и семантическая разметка
+css/style.css          дизайн-система, темы, сетка, адаптивность
+js/app.js              навигация и логика инструментов
+js/settings.js         настройки интерфейса и локальные предпочтения
+.github/workflows/     публикация GitHub Pages через Actions
+```
+
+- **UI shell:** `index.html` задаёт структуру экранов и доступные элементы управления.
+- **Design system:** CSS-переменные поддерживают светлую и тёмную темы, адаптивные размеры, сетчатый фон и режим плотного интерфейса.
+- **Application logic:** `js/app.js` содержит редактор, конвертацию текстовых файлов, обработку изображений, утилиты текста, заметки и навигацию.
+- **Preferences:** `js/settings.js` управляет темой, сеткой, плотностью, размером текста и анимациями. Предпочтения хранятся локально, если пользователь включил запоминание.
+- **Privacy by design:** обработка выполняется в браузере; заметки и настройки хранятся в локальном хранилище устройства. Не используй браузерное хранилище как единственную копию важных документов.
+- **Dependencies:** ноль runtime-зависимостей; сборка не требуется.
 
 ## Features
 
-- **Text editor:** basic rich-text formatting, word/character statistics, export to TXT, Markdown and HTML.
-- **File converter:** read local text files and convert text content to TXT, Markdown, HTML, JSON or CSV.
-- **Background tool:** remove a selected solid-like color from an image and export a transparent PNG. This is color-distance processing, not AI object segmentation.
-- **Image tool:** resize images and export PNG, JPEG or WebP.
-- **Text utilities:** change case, normalize whitespace, sort lines, remove duplicate lines and reverse line order.
-- **Quick notes:** autosave in the current browser's local storage.
-- Responsive left navigation and light/dark theme.
+- Rich-text редактор со статистикой и экспортом TXT / Markdown / HTML
+- Конвертер текстовых форматов TXT, Markdown, HTML, JSON и CSV
+- Удаление однотонного фона изображения и экспорт прозрачного PNG
+- Изменение размеров изображений, экспорт PNG / JPEG / WebP
+- Инструменты текста и быстрые локальные заметки
+- Главное меню-бургер, мобильная навигация и быстрый переход между разделами
+- Настройки темы, фоновой сетки, плотности интерфейса, размера текста и анимаций
+- Клавиатурная доступность, фокус-индикаторы и поддержка `prefers-reduced-motion`
 
 ## Run locally
 
-1. Download or clone this repository.
-2. Open \`index.html\` in a modern browser.
+Открой `index.html` в браузере. Для тестирования локального сервера:
 
-No installation or build step is required.
+```sh
+python3 -m http.server 8080
+```
 
-## Privacy
+Затем открой `http://localhost:8080`.
 
-Files selected in the tools are processed in the browser; this version does not upload them to a server. Notes and theme preference use browser local storage. Clearing browser data may remove saved notes.
+## OuRi family
 
-## Limitations
-
-- The converter handles text-based formats; it is not a full PDF/DOCX office conversion engine.
-- Background removal is based on color similarity. It is most effective with plain, contrasting backgrounds and may affect similarly colored parts of the subject.
-- The editor's Markdown export is a lightweight conversion, not a complete Markdown parser.
-- This repository does not yet include a real generative AI model. Arakul can be connected to a model/API in a later iteration.
-
-## Project
-
-- OuRi: https://github.com/spaj7468-cell/ouri-corp
-- Arakul: https://github.com/spaj7468-cell/Arakul
+- [OuRi Corp](https://github.com/spaj7468-cell/ouri-corp)
+- [QKC](https://github.com/spaj7468-cell/qkc)
+- [QKC Engine](https://github.com/spaj7468-cell/qkc-engine)
+- [QKCcode](https://github.com/spaj7468-cell/qkccode)
 
 ## License
 
-MIT
+MIT — see [LICENSE](./LICENSE), if present.
