@@ -1,0 +1,24 @@
+{
+  "name": "Arakul Studio — OuRi",
+  "short_name": "Arakul",
+  "description": "Бесплатное рабочее пространство для документов, изображений и мини 3D-редактора.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08080a",
+  "theme_color": "#08080a",
+  "lang": "ru",
+  "categories": [
+    "productivity",
+    "utilities",
+    "design"
+  ],
+  "icons": [
+    {
+      "src": "assets/brand.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
