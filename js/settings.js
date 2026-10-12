@@ -23,6 +23,7 @@ function load(){
 function open(){modal.classList.add('show');modal.setAttribute('aria-hidden','false');$('#settingsClose').focus()}
 function close(){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');$('#settingsOpen').focus()}
 $('#settingsOpen').addEventListener('click',open);
+$('#themeToggle').addEventListener('click',()=>{ $('#settingTheme').value=root.dataset.theme||'dark'; });
 $('#settingsClose').addEventListener('click',close);
 $('#settingsDone').addEventListener('click',()=>{apply();close();const t=$('#toast');t.textContent='Настройки сохранены';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)});
 modal.addEventListener('click',e=>{if(e.target===modal)close()});
