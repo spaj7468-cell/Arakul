@@ -1,0 +1,27 @@
+{
+  "name": "arakul-studio",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "description": "OuRi Studio — zero-dependency browser workspace for documents, images, Markdown and lightweight 3D scenes.",
+  "license": "MIT",
+  "scripts": {
+    "serve": "python3 -m http.server 8080",
+    "test": "node test/smoke.mjs"
+  },
+  "keywords": [
+    "ouri",
+    "vanilla-js",
+    "editor",
+    "markdown",
+    "3d",
+    "pwa",
+    "offline",
+    "mit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spaj7468-cell/Arakul.git"
+  },
+  "homepage": "https://spaj7468-cell.github.io/Arakul/"
+}
