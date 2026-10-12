@@ -54,7 +54,7 @@ function exportObj(){let out='# Arakul Studio OBJ export\n',offset=1;objects.for
 function exportJson(){download('arakul-scene.json',JSON.stringify({format:'Arakul Scene v1',objects},null,2),'application/json')}
 $('#sceneExport').addEventListener('click',exportObj);$('#sceneExportJson').addEventListener('click',exportJson);
 canvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,yaw,pitch,id:e.pointerId};canvas.setPointerCapture(e.pointerId)});
-canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw=drag.yaw+(e.clientX-drag.x)*.009;pitch=Math.max(-1.25,Math.min(1.25,drag.pitch+(e.clientY-drag.y)*.009));render()});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw=drag.yaw+(e.clientX-drag.x)*.009;pitch=Math.max(-1.25,Math.min(1.25,drag.pitch-(e.clientY-drag.y)*.009));render()});
 canvas.addEventListener('pointerup',e=>{if(drag&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<5){const rect=canvas.getBoundingClientRect(),w=rect.width,h=rect.height;let best=-1,dist=48;objects.forEach((o,i)=>{const p=project([o.x,o.y,o.z],w,h),d=Math.hypot(p[0]-(e.clientX-rect.left),p[1]-(e.clientY-rect.top));if(d<dist){dist=d;best=i}});if(best>=0){selected=best;list();fields();render()}}drag=null});canvas.addEventListener('pointercancel',()=>{drag=null});
 canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(2.5,Math.min(12,zoom+Math.sign(e.deltaY)*.35));render()},{passive:false});
 function resize(){render()}window.addEventListener('resize',resize);
