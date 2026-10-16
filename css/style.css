@@ -89,26 +89,13 @@ body.no-motion *,body.no-motion *:before,body.no-motion *:after{animation:none!i
 @media(max-width:720px){.mobile-dock{position:fixed;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;left:8px;right:8px;bottom:max(8px,env(safe-area-inset-bottom));z-index:60;padding:7px;border:1px solid var(--line2);border-radius:18px;background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(22px);box-shadow:0 12px 36px #0003}.mobile-dock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;padding:7px 2px;border:1px solid transparent;border-radius:12px;background:transparent;color:var(--muted);font-size:9px}.mobile-dock button.active,.mobile-dock button:hover{background:var(--panel2);border-color:var(--line);color:var(--text)}.dock-icon{font-size:18px;line-height:1.1}.content{padding-bottom:110px}}
 
 
-/* Arakul navigation fix: desktop anchor navigation stays fully visible; only page content scrolls */
-@media (min-width:721px){
-  .sidebar{position:fixed;inset:0 0 auto 0;width:100%;height:70px;min-height:70px;padding:10px clamp(14px,2vw,28px);display:flex;flex-direction:row;align-items:center;gap:clamp(10px,1.5vw,22px);overflow:hidden;z-index:30}
-  .sidebar>.nav{display:flex;align-items:center;gap:3px;flex:1;min-width:0;overflow:visible}
-  .sidebar .nav button,.sidebar .nav a{width:auto;flex:0 0 auto;white-space:nowrap}
-  .main{margin-left:0;padding-top:134px}
-  .topbar{top:70px}
-}
-@media (max-width:1100px) and (min-width:721px){
-  .sidebar{gap:8px;padding-inline:14px}
-  .sidebar>.nav{gap:1px}
-  .sidebar .nav button,.sidebar .nav a{padding:8px 7px;font-size:11px;gap:5px}
-  .sidebar .ni{width:15px;font-size:14px}
-  .brand strong{font-size:14px}
-}
 
-/* Arakul: absolutely no horizontal scrolling in the top navigation */
-html,body{overflow-x:hidden!important}
-@media (min-width:721px){
-  .sidebar{overflow:hidden!important}
-  .sidebar>.nav{overflow:hidden!important;max-width:100%;}
-  .sidebar .nav button,.sidebar .nav a{flex-shrink:1!important;min-width:0!important;overflow:hidden;text-overflow:ellipsis;}
+/* Navigation restoration: preserve original sidebar structure */
+html,body{overflow-x:hidden}
+@media(min-width:721px){
+ .sidebar{position:fixed;top:0;left:0;width:var(--sidebar,260px);height:100vh;display:block;overflow-y:auto;overflow-x:hidden;padding:0;z-index:30}
+ .sidebar>.nav{display:grid;gap:4px;overflow:visible;max-width:none}
+ .sidebar .nav button,.sidebar .nav a{width:100%;flex:none;min-width:0;white-space:normal;overflow:visible;text-overflow:clip}
+ .main{margin-left:var(--sidebar,260px);padding-top:0}
+ .topbar{top:0}
 }
