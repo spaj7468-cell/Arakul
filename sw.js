@@ -1,4 +1,4 @@
-const CACHE='arakul-studio-v5';
+const CACHE='arakul-studio-v6';
 const FILES=[
  './','./index.html','./manifest.webmanifest',
  './css/style.css','./css/core.css','./css/theme.css','./css/components.css','./css/responsive.css','./css/top-nav.css','./css/studio-redesign.css','./css/qkc-inspired.css','./css/media-studio.css','./css/3d-pro.css',
