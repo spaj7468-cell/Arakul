@@ -99,3 +99,17 @@ html,body{overflow-x:hidden}
  .main{margin-left:var(--sidebar,260px);padding-top:0}
  .topbar{top:0}
 }
+
+/* Arakul top navigation: four tabs + expandable all-tools menu */
+.primary-nav{display:flex!important;align-items:center;gap:5px;flex:1}
+.primary-nav button{width:auto!important;flex:0 0 auto!important;white-space:nowrap}
+.more-tabs-wrap{position:relative;margin-left:auto}
+.more-tabs-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text);cursor:pointer}
+.more-tabs-panel{position:absolute;right:0;top:calc(100% + 10px);width:min(520px,calc(100vw - 28px));padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:var(--shadow);z-index:100}
+.more-tabs-panel[hidden]{display:none}
+.more-tabs-title{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:2px 4px 10px}
+.more-tabs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.more-tabs-grid button{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--muted);text-align:left;cursor:pointer}
+.more-tabs-grid button:hover{background:var(--panel2);border-color:var(--line);color:var(--text)}
+@media(min-width:721px){.sidebar{display:none!important}.main{margin-left:0!important}.topbar{padding-left:28px}.topbar-left{flex:1}.crumb{display:none}}
+@media(max-width:720px){.primary-nav{display:none!important}.more-tabs-wrap{margin-left:8px}.more-tabs-btn span{display:none}.more-tabs-panel{position:fixed;right:14px;top:67px}.more-tabs-grid{grid-template-columns:1fr}}
