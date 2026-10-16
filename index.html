@@ -18,14 +18,11 @@
 <aside class="sidebar" id="sidebar" aria-label="Главная навигация">
 <a class="brand" href="#home" data-page="home"><span class="brandmark"><img src="assets/brand.svg" alt="" width="36" height="36"></span><span><strong>Arakul Studio</strong><small>studio · open source</small></span></a>
 <div class="label">Рабочее пространство</div>
-<nav class="nav">
-<button class="active" data-page="home"><span class="ni"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span><span>Обзор</span></button>
-<button data-page="editor"><span class="ni"><svg viewBox="0 0 24 24"><path d="M5 4h14M12 4v16M8 20h8"/></svg></span><span>Документы</span></button>
-<button data-page="convert"><span class="ni"><svg viewBox="0 0 24 24"><path d="M4 7h15m-4-4 4 4-4 4M20 17H5m4-4-4 4 4 4"/></svg></span><span>Конвертер файлов</span></button>
-<button data-page="background"><span class="ni"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z"/></svg></span><span>Удаление фона</span></button>
-<button data-page="image"><span class="ni"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></span><span>Изображения</span></button>
-<button data-page="texttools"><span class="ni"><svg viewBox="0 0 24 24"><path d="M4 7V4h16v3M12 4v16M8 20h8"/></svg></span><span>Инструменты текста</span></button>
-<button data-page="notes"><span class="ni"><svg viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5zM8 11h8M8 15h8M8 7h5"/></svg></span><span>Заметки</span></button>
+<nav class="nav primary-nav" aria-label="Основные вкладки">
+<button class="active" data-page="home"><span class="ni">⌂</span><span>Обзор</span></button>
+<button data-page="editor"><span class="ni">T</span><span>Документы</span></button>
+<button data-page="convert"><span class="ni">⇄</span><span>Конвертер</span></button>
+<button data-page="image"><span class="ni">▣</span><span>Изображения</span></button>
 </nav>
 <div class="label">Создание</div>
 <nav class="nav"><button data-page="markdown"><span class="ni"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM7 15V9l3 3 3-3v6M17 11v4m-2-2 2 2 2-2"/></svg></span><span>Markdown Studio</span></button><button data-page="studio3d"><span class="ni"><svg viewBox="0 0 24 24"><path d="m12 3 9 5v8l-9 5-9-5V8zM3.5 8.2 12 13l8.5-4.8M12 13v8"/></svg></span><span>3D Studio</span></button><button data-page="library"><span class="ni"><svg viewBox="0 0 24 24"><path d="M4 5h6l2 2h8v12H4zM8 11h8M8 15h5"/></svg></span><span>Мои документы</span></button></nav>
@@ -35,7 +32,14 @@
 </aside>
 <div class="overlay" id="overlay"></div>
 <div class="main">
-<header class="topbar"><div class="topbar-left"><button class="iconbtn menubtn" id="menuToggle" aria-label="Открыть или скрыть меню" title="Главное меню">☰</button><div class="crumb">Arakul Studio <span> / </span><b id="crumb">Обзор</b></div></div><div class="actions"><button class="iconbtn" id="commandOpen" title="Быстрый поиск (Ctrl+K)" aria-label="Быстрый поиск">⌕</button><span class="status hide-mobile"><i class="dot"></i>Локальная обработка</span><button class="iconbtn" id="settingsOpen" title="Настройки" aria-label="Открыть настройки">⚙</button><button class="iconbtn" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">◐</button></div></header>
+<header class="topbar"><div class="topbar-left"><button class="iconbtn menubtn" id="menuToggle" aria-label="Открыть или скрыть меню" title="Главное меню">☰</button><div class="crumb">Arakul Studio <span> / </span><b id="crumb">Обзор</b></div></div><div class="actions"><button class="iconbtn" id="commandOpen" title="Быстрый поиск (Ctrl+K)" aria-label="Быстрый поиск">⌕</button><span class="status hide-mobile"><i class="dot"></i>Локальная обработка</span><button class="iconbtn" id="settingsOpen" title="Настройки" aria-label="Открыть настройки">⚙</button><button class="iconbtn" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">◐</button></div></header><div class="more-tabs-wrap"><button class="more-tabs-btn" id="moreTabsToggle" aria-expanded="false" aria-controls="moreTabsPanel">☰ <span>Все вкладки</span></button><div class="more-tabs-panel" id="moreTabsPanel" hidden><div class="more-tabs-title">Все инструменты</div><div class="more-tabs-grid">
+<button data-page="background">◐ <span>Удаление фона</span></button>
+<button data-page="texttools">T <span>Инструменты текста</span></button>
+<button data-page="notes">▤ <span>Заметки</span></button>
+<button data-page="markdown">M <span>Markdown Studio</span></button>
+<button data-page="studio3d">◇ <span>3D Studio</span></button>
+<button data-page="library">□ <span>Мои документы</span></button>
+</div></div></div>
 <main class="content">
 <section class="page active" id="page-home"><div class="head"><div><div class="eyebrow">One workspace · many tools</div><h1>Создавай больше.<br>В одном месте.</h1><p>Бесплатная студия OuRi для документов, текста, изображений и 3D. Без регистрации, подписки и обязательных тяжёлых зависимостей.</p></div><div class="status"><i class="dot"></i>Браузерная обработка</div></div>
 <div class="start-here" style="margin:18px 0 22px;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--panel)">
