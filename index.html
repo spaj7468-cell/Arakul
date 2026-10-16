@@ -13,7 +13,7 @@
 <meta name="description" content="Arakul Studio — бесплатные инструменты для текста, файлов и изображений.">
 <title>Arakul Studio — Arakul · документы, медиа и 3D</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/core.css"><link rel="stylesheet" href="css/theme.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/top-nav.css">
-<link rel="stylesheet" href="css/studio-redesign.css"><link rel="stylesheet" href="css/qkc-inspired.css">
+<link rel="stylesheet" href="css/studio-redesign.css"><link rel="stylesheet" href="css/qkc-inspired.css"><link rel="stylesheet" href="css/media-studio.css"><link rel="stylesheet" href="css/3d-pro.css">
 </head>
 <body>
 <aside class="sidebar" id="sidebar" aria-label="Главная навигация">
@@ -43,7 +43,7 @@
 </nav>
 <div class="top-actions"><button class="iconbtn" id="commandOpen" title="Быстрый поиск">⌕</button><button class="iconbtn" id="settingsOpen" title="Настройки">⚙</button><button class="iconbtn" id="themeToggle" title="Тема">◐</button>
 <div class="more-tabs-wrap"><button class="iconbtn more-tabs-btn" id="moreTabsToggle" aria-expanded="false" aria-controls="moreTabsPanel">☰</button><div class="more-tabs-panel" id="moreTabsPanel" hidden><div class="more-tabs-title">Все вкладки</div><div class="more-tabs-grid">
-<button data-page="background">◐ <span>Удаление фона</span></button><button data-page="texttools">T <span>Инструменты текста</span></button><button data-page="notes">▤ <span>Заметки</span></button><button data-page="markdown">M <span>Markdown Studio</span></button><button data-page="studio3d">◇ <span>3D Studio</span></button><button data-page="library">□ <span>Мои документы</span></button>
+<button data-page="background">◐ <span>Удаление фона</span></button><button data-page="video">▶ <span>Видеомонтаж</span></button><button data-page="photo">▧ <span>Фото-редактор</span></button><button data-page="texttools">T <span>Инструменты текста</span></button><button data-page="notes">▤ <span>Заметки</span></button><button data-page="markdown">M <span>Markdown Studio</span></button><button data-page="studio3d">◇ <span>3D Studio</span></button><button data-page="library">□ <span>Мои документы</span></button>
 </div></div></div></div></header>
 <main class="content">
 <section class="page active" id="page-home"><div class="head"><div><div class="eyebrow">One workspace · many tools</div><h1>Создавай больше.<br>В одном месте.</h1><p>Бесплатная студия OuRi для документов, текста, изображений и 3D. Без регистрации, подписки и обязательных тяжёлых зависимостей.</p></div><div class="status"><i class="dot"></i>Браузерная обработка</div></div>
@@ -77,6 +77,60 @@
 <section class="page" id="page-image"><div class="head"><div><div class="eyebrow">04 / Image lab</div><h1>Мастер изображений</h1><p>Изменяй размеры и экспортируй изображение в PNG, JPEG или WebP.</p></div></div>
 <div class="grid split"><div class="panel"><div class="panelhead"><h3>Исходное изображение</h3></div><div class="drop"><strong>Выбери изображение</strong><p>PNG, JPEG, WebP, GIF (первый кадр)</p><label class="btn small"><input type="file" id="imgFile" accept="image/*" hidden>Загрузить файл</label><div class="filename" id="imgName">Файл не выбран</div></div><div class="row" style="margin-top:15px"><div class="field"><label for="imgWidth">Ширина (px)</label><input class="input" id="imgWidth" type="number" min="1" max="8000" value="800"></div><div class="field"><label for="imgHeight">Высота (px)</label><input class="input" id="imgHeight" type="number" min="1" max="8000" value="600"></div></div><label style="font-size:12px;display:flex;gap:8px;align-items:center;margin:0 0 15px"><input type="checkbox" id="imgRatio" checked> Сохранять пропорции</label><div class="field"><label for="imgFormat">Формат результата</label><select class="select" id="imgFormat"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></div><div class="field"><div class="rangehead"><label for="imgQuality">Качество JPEG / WebP</label><b id="imgQualityValue">90%</b></div><input class="range" type="range" id="imgQuality" min="10" max="100" value="90"></div><button class="btn primary" id="imgDownload" disabled style="width:100%">Обработать и скачать ↓</button></div>
 <div class="panel"><div class="panelhead"><h3>Предпросмотр</h3><span class="muted" style="font-size:11px" id="imgDimensions">Нет изображения</span></div><div class="checker" id="imgPreview"><span class="muted">Изображение появится здесь</span></div><p class="tiny">Максимальный размер стороны — 8000 пикселей. JPEG не поддерживает прозрачность.</p></div></div></section>
+<section class="page" id="page-video">
+  <div class="head"><div><div class="eyebrow">10 / Motion lab</div><h1>Видеомонтаж</h1><p>Обрезка, скорость, цвет, звук и текст поверх видео. Предпросмотр работает локально в браузере.</p></div><div class="head-actions"><label class="btn primary">＋ Открыть видео<input id="videoFile" type="file" accept="video/*" hidden></label><button class="btn" id="videoExport" disabled>Экспорт WebM ↓</button></div></div>
+  <div class="video-workspace">
+    <div class="panel video-preview-panel">
+      <div class="panelhead"><h3>Предпросмотр</h3><span class="muted" id="videoStatus">Выбери видеофайл</span></div>
+      <div class="video-stage"><canvas id="videoCanvas" width="1280" height="720" aria-label="Предпросмотр видео"></canvas><div class="video-empty" id="videoEmpty"><span>▶</span><strong>Твоя монтажная площадка</strong><small>MP4, WebM, MOV и другие форматы, поддерживаемые браузером</small></div></div>
+      <video id="videoSource" playsinline preload="metadata" hidden></video>
+      <div class="video-playbar"><button class="btn primary" id="videoPlay" disabled>▶ Воспроизвести</button><span id="videoClock" class="mono">00:00 / 00:00</span><input id="videoSeek" type="range" min="0" max="1000" value="0" aria-label="Позиция видео" disabled><button class="btn" id="videoFrame" disabled>Кадр</button></div>
+    </div>
+    <aside class="panel video-controls">
+      <div class="panelhead"><h3>Монтаж</h3><span class="tiny">Локальная обработка</span></div>
+      <div class="field"><label for="videoTitle">Текст поверх видео</label><input class="input" id="videoTitle" placeholder="Добавь заголовок…"></div>
+      <div class="field"><label for="videoTitlePosition">Расположение текста</label><select class="select" id="videoTitlePosition"><option value="bottom">Снизу</option><option value="center">По центру</option><option value="top">Сверху</option></select></div>
+      <div class="field"><label for="videoSpeed">Скорость <b id="videoSpeedVal">1×</b></label><input id="videoSpeed" type="range" min="0.25" max="2" value="1" step="0.25"></div>
+      <div class="field"><label for="videoBrightness">Яркость <b id="videoBrightnessVal">100%</b></label><input id="videoBrightness" type="range" min="50" max="150" value="100"></div>
+      <div class="field"><label for="videoContrast">Контраст <b id="videoContrastVal">100%</b></label><input id="videoContrast" type="range" min="50" max="160" value="100"></div>
+      <div class="field"><label for="videoSaturation">Насыщенность <b id="videoSaturationVal">100%</b></label><input id="videoSaturation" type="range" min="0" max="180" value="100"></div>
+      <label class="checkline"><input id="videoMute" type="checkbox"> Убрать звук в экспорте</label>
+      <button class="btn" id="videoReset" style="width:100%">Сбросить настройки</button>
+    </aside>
+    <div class="panel video-timeline">
+      <div class="panelhead"><h3>Таймлайн и обрезка</h3><span class="tiny">Выбери участок для экспорта</span></div>
+      <div class="trim-grid">
+        <div class="field"><label for="videoTrimStart">Начало, секунды</label><input class="input" id="videoTrimStart" type="number" min="0" value="0" step=".1"></div>
+        <div class="field"><label for="videoTrimEnd">Конец, секунды</label><input class="input" id="videoTrimEnd" type="number" min="0" value="0" step=".1"></div>
+        <div class="field"><label for="videoAspect">Кадр</label><select class="select" id="videoAspect"><option value="source">Исходный</option><option value="16:9">16:9 · видео</option><option value="9:16">9:16 · вертикальный</option><option value="1:1">1:1 · квадрат</option></select></div>
+      </div>
+      <div class="timeline-track"><span id="videoTrimVisual"></span></div>
+      <div class="video-export-note" id="videoExportNote">Экспорт записывает обработанный предпросмотр в реальном времени. Держи вкладку открытой до завершения.</div>
+    </div>
+  </div>
+</section>
+<section class="page" id="page-photo">
+  <div class="head"><div><div class="eyebrow">11 / Photo lab</div><h1>Фото-редактор</h1><p>Настрой свет, цвет и резкость, кадрируй, поворачивай, добавляй подписи и экспортируй изображение в полном разрешении.</p></div><div class="head-actions"><label class="btn primary">＋ Открыть фото<input id="photoFile" type="file" accept="image/*" hidden></label><button class="btn" id="photoUndo" disabled>↶ Отменить</button><button class="btn" id="photoExport">Экспорт ↓</button></div></div>
+  <div class="photo-workspace">
+    <aside class="panel photo-tools">
+      <div class="panelhead"><h3>Коррекция</h3><button class="btn small" id="photoReset">Сброс</button></div>
+      <div class="field"><label for="photoBrightness">Яркость <b id="photoBrightnessVal">100%</b></label><input id="photoBrightness" type="range" min="0" max="200" value="100"></div>
+      <div class="field"><label for="photoContrast">Контраст <b id="photoContrastVal">100%</b></label><input id="photoContrast" type="range" min="0" max="200" value="100"></div>
+      <div class="field"><label for="photoSaturation">Насыщенность <b id="photoSaturationVal">100%</b></label><input id="photoSaturation" type="range" min="0" max="200" value="100"></div>
+      <div class="field"><label for="photoBlur">Мягкость <b id="photoBlurVal">0 px</b></label><input id="photoBlur" type="range" min="0" max="8" value="0" step=".5"></div>
+      <div class="field"><label for="photoPreset">Образ</label><select class="select" id="photoPreset"><option value="none">Оригинал</option><option value="mono">Чёрно-белый</option><option value="warm">Тёплый</option><option value="cool">Холодный</option><option value="vintage">Винтаж</option></select></div>
+      <div class="panelhead photo-subhead"><h3>Трансформация</h3></div>
+      <div class="row"><button class="btn" id="photoRotateLeft">↶ 90°</button><button class="btn" id="photoRotateRight">↷ 90°</button></div>
+      <div class="row"><button class="btn" id="photoFlipH">↔ Отразить</button><button class="btn" id="photoCrop">Кадрировать</button></div>
+      <div class="field"><label for="photoCropRatio">Пропорции кадра</label><select class="select" id="photoCropRatio"><option value="free">Свободно / центр</option><option value="1:1">1:1 квадрат</option><option value="4:3">4:3</option><option value="16:9">16:9</option><option value="9:16">9:16</option></select></div>
+      <div class="field"><label for="photoFormat">Формат экспорта</label><select class="select" id="photoFormat"><option value="image/png">PNG · без потерь</option><option value="image/jpeg">JPEG · компактный</option><option value="image/webp">WebP · современный</option></select></div>
+    </aside>
+    <div class="panel photo-canvas-panel"><div class="panelhead"><h3 id="photoName">Рабочий холст</h3><span class="tiny" id="photoDimensions">Файл не выбран</span></div>
+      <div class="photo-stage"><canvas id="photoCanvas" width="1200" height="800" aria-label="Фото на холсте"></canvas><div class="photo-empty" id="photoEmpty"><span>▧</span><strong>Твоя фотолаборатория</strong><small>Фото не загружаются на сервер — всё обрабатывается на устройстве</small></div></div>
+      <div class="photo-bottom"><div class="field"><label for="photoCaption">Текст на фото</label><input class="input" id="photoCaption" placeholder="Подпись или заголовок…"></div><button class="btn" id="photoAddCaption">Добавить текст</button></div>
+    </div>
+  </div>
+</section>
 <section class="page" id="page-texttools"><div class="head"><div><div class="eyebrow">05 / Text lab</div><h1>Инструменты текста</h1><p>Быстро преобразуй текст, очисти пробелы и посчитай статистику.</p></div></div>
 <div class="panel"><div class="field"><label for="textInput">Исходный текст</label><textarea class="textarea" id="textInput" placeholder="Вставь или напиши текст здесь…"></textarea></div><div class="row"><button class="btn" data-textop="upper">В ВЕРХНИЙ РЕГИСТР</button><button class="btn" data-textop="lower">в нижний регистр</button><button class="btn" data-textop="title">Каждое Слово</button><button class="btn" data-textop="trim">Очистить пробелы</button><button class="btn" data-textop="sort">Сортировать строки</button><button class="btn" data-textop="dedupe">Удалить дубликаты</button><button class="btn" data-textop="reverse">Обратить строки</button></div><div class="footstats"><span id="textStats">0 слов · 0 символов</span><button class="btn small" id="textCopy">Копировать результат</button></div></div></section>
 <section class="page" id="page-markdown"><div class="head"><div><div class="eyebrow">07 / Markdown workbench</div><h1>Markdown Studio</h1><p>README, заметки и документация с предпросмотром.</p></div><div class="head-actions"><button class="btn" id="mdCopy">Копировать</button><button class="btn primary" id="mdExport">Экспорт .md</button></div></div><div class="md-layout"><div class="panel"><div class="panelhead"><h3>Исходник Markdown</h3><span class="muted" id="mdStats">0 символов</span></div><textarea class="textarea md-source" id="mdSource" spellcheck="true" placeholder="# Мой проект&#10;&#10;Пиши Markdown здесь…"># Мой проект
@@ -138,6 +192,6 @@
   </script>
 </footer>
 
-<script src="js/studio-redesign.js"></script><script src="js/qkc-motion.js"></script>
+<script src="js/studio-redesign.js"></script><script src="js/qkc-motion.js"></script><script src="js/video-editor.js"></script><script src="js/photo-editor.js"></script><script src="js/document-pro.js"></script><script src="js/3d-pro.js"></script>
 </body>
 </html>
