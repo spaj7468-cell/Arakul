@@ -113,3 +113,11 @@ html,body{overflow-x:hidden}
 .more-tabs-grid button:hover{background:var(--panel2);border-color:var(--line);color:var(--text)}
 @media(min-width:721px){.sidebar{display:none!important}.main{margin-left:0!important}.topbar{padding-left:28px}.topbar-left{flex:1}.crumb{display:none}}
 @media(max-width:720px){.primary-nav{display:none!important}.more-tabs-wrap{margin-left:8px}.more-tabs-btn span{display:none}.more-tabs-panel{position:fixed;right:14px;top:67px}.more-tabs-grid{grid-template-columns:1fr}}
+
+/* Clean Arakul top bar v2 */
+@media(min-width:721px){
+.sidebar{display:none!important}.main{margin-left:0!important}.topbar{height:72px;padding:0 24px;display:flex;gap:24px;justify-content:initial;position:sticky;top:0}.topbar-brand{display:flex;align-items:center;gap:10px;min-width:145px}.topbar-brand strong{display:block;font-size:14px;letter-spacing:.12em}.topbar-brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.2em}.topbar-brand .brandmark{width:34px;height:34px;margin:0}.top-tabs{display:flex;align-items:stretch;gap:3px;height:100%;flex:1}.top-tab{position:relative;border:0;background:transparent;color:var(--muted);padding:0 17px;font-size:12px;font-weight:650;cursor:pointer}.top-tab:hover{color:var(--text)}.top-tab.active{color:var(--text)}.top-tab.active:after{content:"";position:absolute;left:15px;right:15px;bottom:0;height:2px;background:var(--text);border-radius:2px}.top-actions{display:flex;align-items:center;gap:7px}.top-actions .more-tabs-wrap{position:relative;margin:0}.more-tabs-panel{right:0;top:48px;width:410px}.more-tabs-btn{font-size:17px}
+}
+@media(max-width:720px){
+.sidebar{display:none!important}.main{margin-left:0!important}.topbar{height:58px;padding:0 12px;gap:10px}.topbar-brand{display:flex;align-items:center;gap:7px}.topbar-brand .brandmark{width:30px;height:30px}.topbar-brand strong{font-size:11px}.topbar-brand small{font-size:7px}.top-tabs{display:none}.top-actions{margin-left:auto;gap:5px}.top-actions .status{display:none}.more-tabs-panel{position:fixed;right:12px;top:64px;width:min(390px,calc(100vw - 24px))}
+}
