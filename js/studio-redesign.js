@@ -29,7 +29,7 @@ if(panel){
  document.addEventListener('click',e=>{if(!e.target.closest('.more-tabs-wrap'))close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden){close();toggle&&toggle.focus()}});
 }
-const pageNames={home:'Обзор',editor:'Документы',convert:'Конвертер',image:'Изображения',background:'Удаление фона',texttools:'Инструменты текста',notes:'Заметки',markdown:'Markdown Studio',studio3d:'3D Studio',library:'Мои документы'};
+const pageNames={home:'Обзор',editor:'Документы',convert:'Конвертер',image:'Изображения',video:'Видеомонтаж',photo:'Фото-редактор',background:'Удаление фона',texttools:'Инструменты текста',notes:'Заметки',markdown:'Markdown Studio',studio3d:'3D Studio',library:'Мои документы'};
 function syncNav(){
  const id=(location.hash||'#home').slice(1);
  $$('.top-tab').forEach(b=>{const active=b.dataset.page===id;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
