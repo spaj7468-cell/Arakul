@@ -10,13 +10,15 @@ if(!document.getElementById('objDuplicate')){const b=document.createElement('but
 const storeKey='ar akul-scene-v1'.replace(/ /g,'');
 function safeLoad(){try{const x=JSON.parse(localStorage.getItem(storeKey)||'null');if(Array.isArray(x)&&x.length)objects=x}catch(e){}}
 function persist(){try{localStorage.setItem(storeKey,JSON.stringify(objects))}catch(e){}}
-function add(type){const n={id:nextId++,type,name:({cube:'Cube',sphere:'Sphere',cylinder:'Cylinder',plane:'Plane'})[type]+' '+nextId,x:(objects.length%3-1)*1.4,y:0,z:Math.floor(objects.length/3)*1.2,scale:1,rx:0,ry:0,rz:0,color:'#bfc2c7'};objects.push(n);selected=objects.length-1;persist();list();fields();render()}
+function add(type){const n={id:nextId++,type,name:({cube:'Cube',sphere:'Sphere',cylinder:'Cylinder',plane:'Plane',cone:'Cone',torus:'Torus'})[type]+' '+nextId,x:(objects.length%3-1)*1.4,y:0,z:Math.floor(objects.length/3)*1.2,scale:1,rx:0,ry:0,rz:0,color:'#bfc2c7'};objects.push(n);selected=objects.length-1;persist();list();fields();render()}
 function geo(o){
  const v=[],f=[];
  if(o.type==='cube'){v.push([-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]);f.push([0,3,2,1],[4,5,6,7],[0,1,5,4],[3,7,6,2],[0,4,7,3],[1,2,6,5])}
  else if(o.type==='plane'){v.push([-2,0,-2],[2,0,-2],[2,0,2],[-2,0,2]);f.push([0,1,2,3])}
- else if(o.type==='sphere'){const lat=10,lon=16;for(let i=0;i<=lat;i++){const p=Math.PI*i/lat;for(let j=0;j<=lon;j++){const t=2*Math.PI*j/lon;v.push([Math.sin(p)*Math.cos(t),Math.cos(p),Math.sin(p)*Math.sin(t)])}}for(let i=0;i<lat;i++)for(let j=0;j<lon;j++){const a=i*(lon+1)+j,b=a+lon+1;f.push([a,b,b+1,a+1])}}
- else {const n=20;for(let j=0;j<n;j++){const t=2*Math.PI*j/n;v.push([Math.cos(t),-1,Math.sin(t)])}for(let j=0;j<n;j++){const t=2*Math.PI*j/n;v.push([Math.cos(t),1,Math.sin(t)])}const bottom=v.length;v.push([0,-1,0]);const top=v.length;v.push([0,1,0]);for(let j=0;j<n;j++){const k=(j+1)%n;f.push([j,k,n+k,n+j],[bottom,k,j],[top,n+j,n+k])}}
+ else if(o.type==='sphere'){const lat=14,lon=22;for(let i=0;i<=lat;i++){const p=Math.PI*i/lat;for(let j=0;j<=lon;j++){const t=2*Math.PI*j/lon;v.push([Math.sin(p)*Math.cos(t),Math.cos(p),Math.sin(p)*Math.sin(t)])}}for(let i=0;i<lat;i++)for(let j=0;j<lon;j++){const a=i*(lon+1)+j,b=a+lon+1;f.push([a,b,b+1,a+1])}}
+ else if(o.type==='torus'){const major=1,minor=.32,nu=28,nv=12;for(let i=0;i<=nu;i++){const u=2*Math.PI*i/nu;for(let j=0;j<=nv;j++){const w=2*Math.PI*j/nv,r=major+minor*Math.cos(w);v.push([r*Math.cos(u),minor*Math.sin(w),r*Math.sin(u)])}}for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const a=i*(nv+1)+j,b=a+nv+1;f.push([a,b,b+1,a+1])}}
+ else if(o.type==='cone'){const n=24;for(let j=0;j<n;j++){const t=2*Math.PI*j/n;v.push([Math.cos(t),-1,Math.sin(t)])}const tip=v.length;v.push([0,1,0]);const center=v.length;v.push([0,-1,0]);for(let j=0;j<n;j++){const k=(j+1)%n;f.push([j,k,tip],[center,k,j])}}
+ else {const n=24;for(let j=0;j<n;j++){const t=2*Math.PI*j/n;v.push([Math.cos(t),-1,Math.sin(t)])}for(let j=0;j<n;j++){const t=2*Math.PI*j/n;v.push([Math.cos(t),1,Math.sin(t)])}const bottom=v.length;v.push([0,-1,0]);const top=v.length;v.push([0,1,0]);for(let j=0;j<n;j++){const k=(j+1)%n;f.push([j,k,n+k,n+j],[bottom,k,j],[top,n+j,n+k])}}
  return {v,f}
 }
 function world(p,o){let [x,y,z]=p.map(n=>n*o.scale);let c=Math.cos,s=Math.sin;
@@ -63,5 +65,5 @@ canvas.addEventListener('pointerup',e=>{if(drag&&Math.hypot(e.clientX-drag.x,e.c
 canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(2.5,Math.min(12,zoom+Math.sign(e.deltaY)*.35));render()},{passive:false});
 function resize(){render()}window.addEventListener('resize',resize);
 safeLoad();if(!objects.length){objects=[{id:nextId++,type:'cube',name:'Cube',x:0,y:0,z:0,scale:1,rx:0,ry:0,rz:0,color:'#bfc2c7'},{id:nextId++,type:'plane',name:'Ground',x:0,y:-1,z:0,scale:1,rx:0,ry:0,rz:0,color:'#bfc2c7'}]}nextId=Math.max(1,...objects.map(o=>o.id+1));selected=0;list();fields();render();
-window.Arakul3D={resize,exportJson,exportObj};
+window.Arakul3D={resize,exportJson,exportObj,add,save:()=>{persist();return JSON.stringify(objects)},load:data=>{if(!Array.isArray(data))throw new Error('Invalid scene');objects=data.filter(o=>o&&['cube','sphere','cylinder','plane','cone','torus'].includes(o.type)).map((o,i)=>({...o,id:Number.isFinite(+o.id)?+o.id:i+1}));nextId=Math.max(1,...objects.map(o=>o.id+1));selected=0;persist();list();fields();render();return objects.length},getObjects:()=>JSON.parse(JSON.stringify(objects))};
 })();
