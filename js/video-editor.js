@@ -75,7 +75,7 @@ $('videoExport').addEventListener('click',async()=>{
  const oldRate=video.playbackRate,oldMute=video.muted;video.playbackRate=+val('videoSpeed');video.muted=$('videoMute').checked;
  try{
   await new Promise(resolve=>{if(video.readyState>=2)resolve();else video.addEventListener('loadeddata',resolve,{once:true})});
-  video.currentTime=start;await new Promise(resolve=>video.addEventListener('seeked',resolve,{once:true}));
+  if(Math.abs(video.currentTime-start)>.05){video.currentTime=start;await new Promise(resolve=>video.addEventListener('seeked',resolve,{once:true}))}
   const stream=canvas.captureStream(30),tracks=[...stream.getVideoTracks()];
   if(!$('videoMute').checked&&video.captureStream){const vs=video.captureStream();vs.getAudioTracks().forEach(t=>tracks.push(t))}
   const merged=new MediaStream(tracks),mime=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>MediaRecorder.isTypeSupported(t))||'';
