@@ -1,0 +1,106 @@
+/* QKC-inspired visual language for Arakul Studio — monochrome, precise, responsive */
+:root{
+  --qkc-ease:cubic-bezier(.16,1,.3,1);
+  --qkc-hairline:color-mix(in srgb,var(--text) 10%,transparent);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(ellipse 78% 40% at 50% -15%,rgba(255,255,255,.075),transparent 70%),
+    linear-gradient(var(--qkc-hairline) 1px,transparent 1px),
+    linear-gradient(90deg,var(--qkc-hairline) 1px,transparent 1px);
+  background-size:auto,32px 32px,32px 32px;
+  background-attachment:fixed;
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 115% 85% at 50% 0%,transparent 45%,rgba(0,0,0,.22) 100%);
+}
+.topbar{isolation:isolate;border-bottom:1px solid var(--qkc-hairline)!important}
+.topbar-brand{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.025em}
+.topbar-brand .brandmark{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff;
+  background:linear-gradient(145deg,#34343a 0%,#111114 78%)!important;
+  border:1px solid rgba(255,255,255,.35)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 5px 20px rgba(0,0,0,.2);
+  font-family:"Space Grotesk",Inter,sans-serif;font-weight:800;
+  letter-spacing:-.08em;
+  transition:transform .45s var(--qkc-ease),border-color .25s,box-shadow .25s;
+}
+.topbar-brand:hover .brandmark{transform:rotate(-7deg) scale(1.055);border-color:rgba(255,255,255,.7)!important;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+.topbar-brand strong{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:.12em}
+.topbar-brand small{letter-spacing:.25em}
+.top-tab{font-weight:600;transition:color .2s,background .2s}
+.top-tab:hover{background:color-mix(in srgb,var(--text) 5%,transparent);border-radius:999px}
+.top-tab.active:after{left:20%;right:20%;height:2px;bottom:9px;border-radius:9px}
+.iconbtn,.more-tabs-btn{transition:transform .2s var(--qkc-ease),background .2s,border-color .2s}
+.iconbtn:hover,.more-tabs-btn:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--text) 28%,var(--line))}
+.more-tabs-panel{
+  border-color:var(--qkc-hairline);
+  background:color-mix(in srgb,var(--panel) 90%,transparent);
+  backdrop-filter:blur(24px) saturate(1.15);
+  box-shadow:0 24px 80px rgba(0,0,0,.42);
+  animation:qkc-menu-in .22s var(--qkc-ease) both;
+}
+.more-tabs-grid button{border-radius:12px;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.more-tabs-grid button:hover{transform:translateY(-1px)}
+.tool-menu-icon{
+  width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;
+  border:1px solid var(--qkc-hairline);border-radius:10px;
+  background:color-mix(in srgb,var(--text) 4%,transparent);
+  color:var(--text);font-weight:700;font-size:14px;
+}
+.tool-menu-label{flex:1;font-size:12px;font-weight:650}
+.tool-menu-group{font-size:10px;color:var(--muted);white-space:nowrap}
+.content{position:relative;z-index:1}
+.head h1,.head h2,.sectiontitle{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.055em}
+.head h1{font-size:clamp(34px,5.2vw,66px);line-height:.99;font-weight:800}
+.head p,.muted{line-height:1.7}
+.card,.panel,.start-here{
+  border-color:var(--qkc-hairline)!important;
+  background:color-mix(in srgb,var(--panel) 88%,transparent);
+  box-shadow:0 8px 28px rgba(0,0,0,.08);
+  backdrop-filter:blur(8px);
+}
+.card{border-radius:18px;transition:transform .28s var(--qkc-ease),border-color .25s,background .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--text) 25%,var(--line))!important;box-shadow:0 18px 44px rgba(0,0,0,.2)}
+.panel,.start-here{border-radius:18px}
+.cardicon{border-radius:13px!important}
+.btn,.iconbtn,.input,.select,.textarea{transition:transform .2s var(--qkc-ease),background .2s,border-color .2s,box-shadow .2s}
+.btn.primary,.btn--primary{background:#f5f5f5!important;color:#09090b!important;border-color:#f5f5f5!important;font-weight:700}
+.btn.primary:hover,.btn--primary:hover{box-shadow:0 10px 28px rgba(255,255,255,.13);transform:translateY(-2px)}
+.btn:not(:disabled):active,.iconbtn:active{transform:scale(.98)}
+input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible,[contenteditable=true]:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+.page.active{animation:qkc-page-in .36s var(--qkc-ease) both}
+.qkc-scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:100;background:transparent;pointer-events:none}
+.qkc-scroll-progress span{display:block;width:0;height:100%;background:var(--text);box-shadow:0 0 12px color-mix(in srgb,var(--text) 35%,transparent);transition:width .08s linear}
+.qkc-reveal{opacity:0;transform:translateY(12px);transition:opacity .55s var(--qkc-ease),transform .55s var(--qkc-ease)}
+.qkc-reveal.qkc-visible{opacity:1;transform:none}
+html[data-theme="light"] body{background-image:radial-gradient(ellipse 78% 40% at 50% -15%,rgba(0,0,0,.055),transparent 70%),linear-gradient(rgba(0,0,0,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.055) 1px,transparent 1px)}
+html[data-theme="light"] body:after{background:radial-gradient(ellipse 115% 85% at 50% 0%,transparent 45%,rgba(0,0,0,.035) 100%)}
+html[data-theme="light"] .topbar-brand .brandmark{color:#fff!important;-webkit-text-fill-color:#fff}
+html[data-theme="light"] .btn.primary,html[data-theme="light"] .btn--primary{background:#111!important;color:#fff!important;border-color:#111!important}
+@keyframes qkc-menu-in{from{opacity:0;transform:translateY(-6px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes qkc-page-in{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(max-width:900px){.topbar{gap:10px}.top-tab{padding-inline:10px}.content{padding-top:28px}}
+@media(max-width:650px){
+  body{background-size:auto,26px 26px,26px 26px}
+  .topbar{height:62px;padding-inline:11px;gap:8px}
+  .topbar-brand .brandmark{width:32px;height:32px}
+  .topbar-brand strong{font-size:11px}
+  .topbar-brand small{font-size:7px}
+  .top-actions .iconbtn{width:35px;height:35px}
+  .more-tabs-panel{top:64px}
+  .more-tabs-grid button{padding:10px}
+  .tool-menu-group{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .qkc-reveal{opacity:1;transform:none}
+}
