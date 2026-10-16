@@ -1,7 +1,7 @@
 {
   "name": "Arakul Studio — OuRi",
   "short_name": "Arakul",
-  "description": "Бесплатное рабочее пространство для документов, изображений и мини 3D-редактора.",
+  "description": "Бесплатное рабочее пространство для документов, видеомонтажа, фотообработки и 3D.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
