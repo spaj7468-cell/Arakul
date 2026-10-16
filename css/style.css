@@ -93,7 +93,7 @@ body.no-motion *,body.no-motion *:before,body.no-motion *:after{animation:none!i
 /* Navigation restoration: preserve original sidebar structure */
 html,body{overflow-x:hidden}
 @media(min-width:721px){
- .sidebar{position:fixed;top:0;left:0;width:var(--sidebar,260px);height:100vh;display:block;overflow-y:auto;overflow-x:hidden;padding:0;z-index:30}
+ .sidebar{position:fixed;top:0;left:0;width:var(--sidebar,260px);height:100vh;display:block;overflow:hidden;padding:0;z-index:30}
  .sidebar>.nav{display:grid;gap:4px;overflow:visible;max-width:none}
  .sidebar .nav button,.sidebar .nav a{width:100%;flex:none;min-width:0;white-space:normal;overflow:visible;text-overflow:clip}
  .main{margin-left:var(--sidebar,260px);padding-top:0}
