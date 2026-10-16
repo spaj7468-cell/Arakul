@@ -104,3 +104,11 @@ body.no-motion *,body.no-motion *:before,body.no-motion *:after{animation:none!i
   .sidebar .ni{width:15px;font-size:14px}
   .brand strong{font-size:14px}
 }
+
+/* Arakul: absolutely no horizontal scrolling in the top navigation */
+html,body{overflow-x:hidden!important}
+@media (min-width:721px){
+  .sidebar{overflow:hidden!important}
+  .sidebar>.nav{overflow:hidden!important;max-width:100%;}
+  .sidebar .nav button,.sidebar .nav a{flex-shrink:1!important;min-width:0!important;overflow:hidden;text-overflow:ellipsis;}
+}
