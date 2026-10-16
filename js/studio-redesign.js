@@ -5,6 +5,8 @@ const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(
 const toggle=$('#moreTabsToggle'),panel=$('#moreTabsPanel');
 const menuItems=[
  ['background','◐','Удаление фона','Изображения'],
+ ['video','▶','Видеомонтаж','Видео'],
+ ['photo','▧','Фото-редактор','Изображения'],
  ['texttools','T','Инструменты текста','Текст'],
  ['notes','▤','Заметки','Текст'],
  ['markdown','M','Markdown Studio','Создание'],
