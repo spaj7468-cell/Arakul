@@ -1,0 +1,32 @@
+<section class="page" id="page-video">
+  <div class="head"><div><div class="eyebrow">10 / Motion lab</div><h1>Видеомонтаж</h1><p>Обрезка, скорость, цвет, звук и текст поверх видео. Предпросмотр работает локально в браузере.</p></div><div class="head-actions"><label class="btn primary">＋ Открыть видео<input id="videoFile" type="file" accept="video/*" hidden></label><button class="btn" id="videoExport" disabled>Экспорт WebM ↓</button></div></div>
+  <div class="video-workspace">
+    <div class="panel video-preview-panel">
+      <div class="panelhead"><h3>Предпросмотр</h3><span class="muted" id="videoStatus">Выбери видеофайл</span></div>
+      <div class="video-stage"><canvas id="videoCanvas" width="1280" height="720" aria-label="Предпросмотр видео"></canvas><div class="video-empty" id="videoEmpty"><span>▶</span><strong>Твоя монтажная площадка</strong><small>MP4, WebM, MOV и другие форматы, поддерживаемые браузером</small></div></div>
+      <video id="videoSource" playsinline preload="metadata" hidden></video>
+      <div class="video-playbar"><button class="btn primary" id="videoPlay" disabled>▶ Воспроизвести</button><span id="videoClock" class="mono">00:00 / 00:00</span><input id="videoSeek" type="range" min="0" max="1000" value="0" aria-label="Позиция видео" disabled><button class="btn" id="videoFrame" disabled>Кадр</button></div>
+    </div>
+    <aside class="panel video-controls">
+      <div class="panelhead"><h3>Монтаж</h3><span class="tiny">Локальная обработка</span></div>
+      <div class="field"><label for="videoTitle">Текст поверх видео</label><input class="input" id="videoTitle" placeholder="Добавь заголовок…"></div>
+      <div class="field"><label for="videoTitlePosition">Расположение текста</label><select class="select" id="videoTitlePosition"><option value="bottom">Снизу</option><option value="center">По центру</option><option value="top">Сверху</option></select></div>
+      <div class="field"><label for="videoSpeed">Скорость <b id="videoSpeedVal">1×</b></label><input id="videoSpeed" type="range" min="0.25" max="2" value="1" step="0.25"></div>
+      <div class="field"><label for="videoBrightness">Яркость <b id="videoBrightnessVal">100%</b></label><input id="videoBrightness" type="range" min="50" max="150" value="100"></div>
+      <div class="field"><label for="videoContrast">Контраст <b id="videoContrastVal">100%</b></label><input id="videoContrast" type="range" min="50" max="160" value="100"></div>
+      <div class="field"><label for="videoSaturation">Насыщенность <b id="videoSaturationVal">100%</b></label><input id="videoSaturation" type="range" min="0" max="180" value="100"></div>
+      <label class="checkline"><input id="videoMute" type="checkbox"> Убрать звук в экспорте</label>
+      <button class="btn" id="videoReset" style="width:100%">Сбросить настройки</button>
+    </aside>
+    <div class="panel video-timeline">
+      <div class="panelhead"><h3>Таймлайн и обрезка</h3><span class="tiny">Выбери участок для экспорта</span></div>
+      <div class="trim-grid">
+        <div class="field"><label for="videoTrimStart">Начало, секунды</label><input class="input" id="videoTrimStart" type="number" min="0" value="0" step=".1"></div>
+        <div class="field"><label for="videoTrimEnd">Конец, секунды</label><input class="input" id="videoTrimEnd" type="number" min="0" value="0" step=".1"></div>
+        <div class="field"><label for="videoAspect">Кадр</label><select class="select" id="videoAspect"><option value="source">Исходный</option><option value="16:9">16:9 · видео</option><option value="9:16">9:16 · вертикальный</option><option value="1:1">1:1 · квадрат</option></select></div>
+      </div>
+      <div class="timeline-track"><span id="videoTrimVisual"></span></div>
+      <div class="video-export-note" id="videoExportNote">Экспорт записывает обработанный предпросмотр в реальном времени. Держи вкладку открытой до завершения.</div>
+    </div>
+  </div>
+</section>
