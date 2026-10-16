@@ -15,7 +15,7 @@ function render(){
  const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.save();ctx.translate(w/2,h/2);ctx.rotate(rotation*Math.PI/180);ctx.scale(flip?-1:1,1);ctx.filter=filter();
  const drawW=rotation%180===0?w:h,drawH=rotation%180===0?h:w;ctx.drawImage(image,-drawW/2,-drawH/2,drawW,drawH);ctx.filter='none';
  const preset=v('photoPreset');if(preset==='vintage'){ctx.fillStyle='rgba(190,135,70,.16)';ctx.fillRect(-w,-h,w*2,h*2);ctx.fillStyle='rgba(0,0,0,.08)';ctx.fillRect(-w,-h,w*2,h*2)}
- if(caption){const fs=Math.max(18,Math.round(w*.045));ctx.font='700 '+fs+'px Inter,system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';ctx.lineWidth=fs*.16;ctx.strokeStyle='rgba(0,0,0,.8)';ctx.strokeText(caption,w/2,h-fs*.55,w*.88);ctx.fillStyle='#fff';ctx.fillText(caption,w/2,h-fs*.55,w*.88)}
+ if(caption){const fs=Math.max(18,Math.round(w*.045));ctx.font='700 '+fs+'px Inter,system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';ctx.lineWidth=fs*.16;ctx.strokeStyle='rgba(0,0,0,.8)';ctx.strokeText(caption,0,h/2-fs*.55,w*.88);ctx.fillStyle='#fff';ctx.fillText(caption,0,h/2-fs*.55,w*.88)}
  ctx.restore();$('photoDimensions').textContent=image.naturalWidth+' × '+image.naturalHeight+' px';$('photoEmpty').hidden=true;
 }
 $('photoFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{remember();image=img;rotation=0;flip=false;caption='';$('photoName').textContent=f.name;$('photoCaption').value='';render()};img.onerror=()=>alert('Не удалось открыть изображение.');img.src=URL.createObjectURL(f)});
