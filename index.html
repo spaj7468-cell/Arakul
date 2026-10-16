@@ -32,14 +32,18 @@
 </aside>
 <div class="overlay" id="overlay"></div>
 <div class="main">
-<header class="topbar"><div class="topbar-left"><button class="iconbtn menubtn" id="menuToggle" aria-label="Открыть или скрыть меню" title="Главное меню">☰</button><div class="crumb">Arakul Studio <span> / </span><b id="crumb">Обзор</b></div></div><div class="actions"><button class="iconbtn" id="commandOpen" title="Быстрый поиск (Ctrl+K)" aria-label="Быстрый поиск">⌕</button><span class="status hide-mobile"><i class="dot"></i>Локальная обработка</span><button class="iconbtn" id="settingsOpen" title="Настройки" aria-label="Открыть настройки">⚙</button><button class="iconbtn" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">◐</button></div></header><div class="more-tabs-wrap"><button class="more-tabs-btn" id="moreTabsToggle" aria-expanded="false" aria-controls="moreTabsPanel">☰ <span>Все вкладки</span></button><div class="more-tabs-panel" id="moreTabsPanel" hidden><div class="more-tabs-title">Все инструменты</div><div class="more-tabs-grid">
-<button data-page="background">◐ <span>Удаление фона</span></button>
-<button data-page="texttools">T <span>Инструменты текста</span></button>
-<button data-page="notes">▤ <span>Заметки</span></button>
-<button data-page="markdown">M <span>Markdown Studio</span></button>
-<button data-page="studio3d">◇ <span>3D Studio</span></button>
-<button data-page="library">□ <span>Мои документы</span></button>
-</div></div></div>
+<header class="topbar">
+<div class="topbar-brand"><div class="brandmark">A</div><div><strong>ARAKUL</strong><small>STUDIO</small></div></div>
+<nav class="top-tabs" aria-label="Основная навигация">
+<button class="top-tab active" data-page="home">Обзор</button>
+<button class="top-tab" data-page="editor">Документы</button>
+<button class="top-tab" data-page="convert">Конвертер</button>
+<button class="top-tab" data-page="image">Изображения</button>
+</nav>
+<div class="top-actions"><button class="iconbtn" id="commandOpen" title="Быстрый поиск">⌕</button><button class="iconbtn" id="settingsOpen" title="Настройки">⚙</button><button class="iconbtn" id="themeToggle" title="Тема">◐</button>
+<div class="more-tabs-wrap"><button class="iconbtn more-tabs-btn" id="moreTabsToggle" aria-expanded="false" aria-controls="moreTabsPanel">☰</button><div class="more-tabs-panel" id="moreTabsPanel" hidden><div class="more-tabs-title">Все вкладки</div><div class="more-tabs-grid">
+<button data-page="background">◐ <span>Удаление фона</span></button><button data-page="texttools">T <span>Инструменты текста</span></button><button data-page="notes">▤ <span>Заметки</span></button><button data-page="markdown">M <span>Markdown Studio</span></button><button data-page="studio3d">◇ <span>3D Studio</span></button><button data-page="library">□ <span>Мои документы</span></button>
+</div></div></div></div></header>
 <main class="content">
 <section class="page active" id="page-home"><div class="head"><div><div class="eyebrow">One workspace · many tools</div><h1>Создавай больше.<br>В одном месте.</h1><p>Бесплатная студия OuRi для документов, текста, изображений и 3D. Без регистрации, подписки и обязательных тяжёлых зависимостей.</p></div><div class="status"><i class="dot"></i>Браузерная обработка</div></div>
 <div class="start-here" style="margin:18px 0 22px;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--panel)">
