@@ -67,3 +67,10 @@ MIT — see [LICENSE](LICENSE).
 - [All repositories](https://github.com/spaj7468-cell?tab=repositories)
 
 OuRi projects were created at different times and have different scopes and maturity levels. Quality and features can vary; a newer project is not automatically better in every area.
+
+## Авторы
+
+| Роль | Автор | Профиль |
+|------|-------|---------|
+| Автор | **telrino** | <https://vk.ru/telrino> |
+| Соавтор | **Бро** | <https://vk.ru/id920684081> |
